@@ -1,0 +1,33 @@
+Node *reverseLinkedList(Node *head){
+    if(head==NULL)
+    {
+        return NULL;
+    }
+        Node *prev=NULL;
+        Node *curr=head;
+        Node *aage=head->next;
+    while(curr!=NULL ){
+        curr->next=prev;
+        prev=curr;
+        curr=aage;
+        if(aage!=NULL)
+        aage=aage->next;
+    }
+    return prev;
+}
+
+RECURSIVE APPROACH
+Node *reverseLinkedListRec(Node *head){
+    if(head==NULL || head->next==NULL){
+        return head;
+    }
+    Node *part2Head = reverseLinkedListRec(head->next);
+    Node *temp=part2Head;
+    while(temp->next!=NULL){
+        temp=temp->next;
+    }
+    temp->next=head;
+    head->next=NULL;
+    
+    return part2Head;
+}
