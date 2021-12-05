@@ -1,0 +1,43 @@
+Node *evenAfterOdd(Node *head){
+    if(head==NULL || head->next==NULL){
+        return head;
+    }
+    Node *firstHead=NULL;
+    Node *firstTail=NULL;
+    Node *secondHead=NULL;
+    Node *secondTail=NULL;
+    while(head!=NULL){
+        if(head->data%2!=0){
+        	if(firstHead==NULL){
+            	firstHead=head;
+            	firstTail=head;
+        	}
+            else{
+                firstTail->next=head;
+                firstTail = firstTail->next;//correction
+            }
+        }
+        else{
+            if(secondHead==NULL){
+                secondHead=head;
+                secondTail=head;
+            }
+            else{
+                secondTail->next=head;
+                secondTail = secondTail->next;//correction 
+            }
+        
+        }
+        head=head->next;
+    }
+    if(firstHead==NULL && firstTail==NULL){
+        return secondHead;
+    }
+    else if(secondHead==NULL && secondTail==NULL){
+        return firstHead;
+    }
+    firstTail->next=NULL;
+    secondTail->next=NULL;
+    firstTail->next=secondHead;
+    return firstHead;
+}
