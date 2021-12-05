@@ -1,0 +1,31 @@
+void printReverse(Node *head){
+    int count=0;
+    
+    if(head==NULL){
+        return;
+    }
+    Node *temp = head;
+    while(temp!=NULL){
+        count++;
+        temp=temp->next;
+    }
+    
+    while(count){
+    	temp = head;
+        for (int i=0;i<count-1; i++){
+            temp=temp->next;
+        }
+        cout<<temp->data<<" ";
+        count--;
+    }
+    
+}
+
+ RECURSIVE APPROACH
+ void printReverse(Node *head){
+     if(head==NULL){
+         return;
+     }
+     printReverse(head->next);
+     cout<<head->data<<" ";
+ }
