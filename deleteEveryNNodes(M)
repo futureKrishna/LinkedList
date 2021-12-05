@@ -1,0 +1,44 @@
+Node *skipMdeleteN(Node *head, int M, int N){
+    
+    if(M==0) 
+        return NULL;
+    
+    if(N == 0) 
+        return head; 
+    
+    int count1=1;
+    int count2=1;
+    Node *temp1=head;
+    Node *temp2=head;
+    
+    while(temp1!=NULL && temp2!=NULL){
+        
+        count1=1;
+        count2=1;
+        
+        while(count1!=M && temp1 != NULL){ 
+            temp1=temp1->next;
+            count1++;
+        }
+        if(temp1!=NULL){               
+        	temp2=temp1->next;
+        }
+        else{
+            return head;
+        }
+        while(temp2!=NULL && count2!=N){
+            Node *tobeDeleted = temp2;
+            temp2=temp2->next; 
+            delete tobeDeleted;
+            count2++;
+        }
+        if(temp2!=NULL){              
+            temp1->next=temp2->next;
+        }
+		else{
+            temp1 -> next = NULL;
+        }
+        temp1 = temp1->next; //
+    }
+    return head;
+}
