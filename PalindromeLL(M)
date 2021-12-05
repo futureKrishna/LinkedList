@@ -1,0 +1,97 @@
+Node *reverseLinkedListRec(Node *head)
+{
+    //Write your code here
+    if(head == NULL || head->next == NULL) {
+        return head;
+    }
+    Node* t = reverseLinkedListRec(head->next);
+    Node* temp = t;
+    while(temp != NULL && temp->next != NULL) {
+        temp = temp->next;
+    }
+    temp->next = head;
+    head->next = NULL;
+    return t;
+}
+
+Node *midPoint(Node *head)
+{
+    // Write your code here
+    if(head == NULL || head->next ==NULL) {
+        return head;
+    }
+    Node* slow = head;
+    Node* fast = head->next;
+    while(fast!= NULL && fast->next!= NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    return slow;
+}
+
+bool isPalindrome(Node *head)
+{
+    //Write your code here
+    if(head == NULL || head->next == NULL)
+        return true;
+    Node* temp = head;
+    Node* prev = NULL;
+    while(temp->next != NULL) {
+        prev = temp;
+        temp = temp->next;
+    }
+    if(head->data == temp->data) {
+        prev->next = NULL;
+        return isPalindrome(head->next);
+    } else
+ 	   return false;
+}
+
+
+
+APPROACH 2
+
+bool helper(Node* head, Node* tail)
+{
+    if(head==tail){
+        return true;
+    }
+    else if(head->next==tail){
+        if(head->data==tail->data){
+            return true;
+        }
+        else
+            return false;
+    }
+    else{
+        Node*temp2=head;
+        while(temp2->next!=tail)
+        {
+            temp2=temp2->next;
+        }
+        if(head->data!=tail->data)
+        {
+            return false;
+        }
+        else
+        {
+            bool ans=helper(head->next,temp2);
+            return ans;
+        }
+        
+    }
+}
+
+bool isPalindrome(Node* head)
+{
+    //write your code here
+    Node *temp=head;
+    Node *tail=NULL;
+    if(head==NULL)
+        return true;
+    while(temp!=NULL){
+        tail=temp;
+        temp=temp->next;
+    }
+    return helper(head,tail);
+}
