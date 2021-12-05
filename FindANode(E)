@@ -12,3 +12,19 @@ int findNode(Node *head, int n){
     }
     return -1;
 }
+
+RECURSIVE APPROACH
+
+int findNodeRec(Node *head, int n){
+    if(head==NULL){
+        return -1;
+    }
+    if(head->data==n){
+        return 0;
+    }
+    int index = findNodeRec(head->next,n);
+    if(index==-1){
+        return -1;
+    }
+    return 1+index;
+}
